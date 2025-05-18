@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeDEX FX</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <h1>PokeDEX FX</h1>
+                <button id="settings-button" class="settings-button" aria-label="Settings">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="filter-container">
+                <select id="region-filter">
+                    <option value="all">All Regions</option>
+                    <option value="kanto">Kanto</option>
+                    <option value="johto">Johto</option>
+                    <option value="hoenn">Hoenn</option>
+                    <option value="sinnoh">Sinnoh</option>
+                    <option value="unova">Unova</option>
+                    <option value="kalos">Kalos</option>
+                    <option value="alola">Alola</option>
+                    <option value="galar">Galar</option>
+                    <option value="paldea">Paldea</option>
+                </select>
+                <select id="form-filter">
+                    <option value="all">All Forms</option>
+                    <option value="normal">Normal Forms</option>
+                    <option value="regional">Regional Forms</option>
+                </select>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search Pokémon by name or ID...">
+                    <button id="search-button">Search</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Settings Panel -->
+        <div id="settings-panel" class="settings-panel">
+            <div class="settings-content">
+                <div class="settings-header">
+                    <h2>Settings</h2>
+                    <button class="close-settings" id="close-settings" aria-label="Close Settings">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="settings-body">
+                    <div class="settings-section">
+                        <h3>Theme</h3>
+                        <div class="theme-options">
+                            <button class="theme-btn" data-theme="default">Ubuntu</button>
+                            <button class="theme-btn" data-theme="classic">Mint</button>
+                            <button class="theme-btn" data-theme="modern">KDE</button>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3>Color Scheme</h3>
+                        <div class="color-options">
+                            <button class="color-btn" data-color="blue">Blue</button>
+                            <button class="color-btn" data-color="red">Red</button>
+                            <button class="color-btn" data-color="green">Green</button>
+                            <button class="color-btn" data-color="purple">Purple</button>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3>Display Mode</h3>
+                        <div class="mode-switch">
+                            <label class="switch">
+                                <input type="checkbox" id="dark-mode-toggle">
+                                <span class="slider round"></span>
+                            </label>
+                            <span>Dark Mode</span>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3>Layout</h3>
+                        <div class="layout-options">
+                            <label class="switch-label">
+                                <input type="checkbox" id="compact-layout">
+                                <span>Compact Mode</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main>
+            <!-- Pokemon Grid View -->
+            <div class="pokemon-grid" id="pokemon-grid">
+                <!-- Pokemon cards will be dynamically added here -->
+            </div>
+
+            <!-- Detailed Pokemon View (initially hidden) -->
+            <div class="pokemon-detail-view" id="pokemon-detail-view" style="display: none;">
+                <button class="back-button" id="back-button">← Back to Grid</button>
+                <div class="pokemon-container">
+                    <div class="pokemon-card" id="pokemon-card">
+                        <div class="pokemon-image-container">
+                            <img id="pokemon-image" src="" alt="Pokemon">
+                            <div class="pokemon-id"></div>
+                        </div>
+                        <div class="pokemon-info">
+                            <h2 class="pokemon-name"></h2>
+                            <div class="pokemon-types"></div>
+                            <div class="pokemon-stats">
+                                <h3>Base Stats</h3>
+                                <div class="stats-container"></div>
+                                <div class="total-stats"></div>
+                            </div>
+                            <div class="pokemon-details">
+                                <div class="detail-item">
+                                    <span>Height:</span>
+                                    <span class="height-value"></span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Weight:</span>
+                                    <span class="weight-value"></span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Abilities:</span>
+                                    <span class="abilities-value"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="evolution-chain">
+                        <h3>Evolution Chain</h3>
+                        <div class="evolution-container"></div>
+                    </div>
+
+                    <div class="additional-info">
+                        <div class="gender-region-card">
+                            <h3>Additional Information</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <h4>Gender Ratio</h4>
+                                    <div class="gender-ratio"></div>
+                                </div>
+                                <div class="info-item">
+                                    <h4>Region</h4>
+                                    <div class="region-info"></div>
+                                </div>
+                                <div class="info-item">
+                                    <h4>Habitat</h4>
+                                    <div class="habitat-info"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="moves-card">
+                            <h3>Move Information</h3>
+                            <div class="moves-container">
+                                <div class="moves-section">
+                                    <h4>Level-up Moves</h4>
+                                    <div class="level-moves"></div>
+                                </div>
+                                <div class="moves-section">
+                                    <h4>TM/TR Moves</h4>
+                                    <div class="tm-moves"></div>
+                                </div>
+                                <div class="moves-section">
+                                    <h4>Egg Moves</h4>
+                                    <div class="egg-moves"></div>
+                                </div>
+                                <div class="moves-section">
+                                    <h4>Tutor Moves</h4>
+                                    <div class="tutor-moves"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="loading-screen">
+            <div class="pokeball"></div>
+            <p>Loading...</p>
+        </div>
+
+        <div class="pagination">
+            <button id="load-more">Load More Pokémon</button>
+        </div>
+
+        <!-- Move Details Modal -->
+        <div id="move-modal" class="move-modal">
+            <div class="move-modal-content">
+                <span class="close-modal">&times;</span>
+                <h2 class="move-title"></h2>
+                <div class="move-info-grid">
+                    <div class="move-stat">
+                        <span>Power</span>
+                        <span class="move-power"></span>
+                    </div>
+                    <div class="move-stat">
+                        <span>Accuracy</span>
+                        <span class="move-accuracy"></span>
+                    </div>
+                    <div class="move-stat">
+                        <span>PP</span>
+                        <span class="move-pp"></span>
+                    </div>
+                    <div class="move-stat">
+                        <span>Category</span>
+                        <span class="move-category"></span>
+                    </div>
+                </div>
+                <div class="move-effectiveness">
+                    <h3>Type Effectiveness</h3>
+                    <div class="effectiveness-grid"></div>
+                </div>
+                <div class="move-description"></div>
+            </div>
+        </div>
+
+        <footer class="copyright">
+            <p>This is a fan project and is not affiliated with Nintendo or The Pokémon Company.</p>
+            <p>Pokémon and all related media are registered trademarks of Nintendo, Game Freak, and The Pokémon Company © 1996-2024.</p>
+        </footer>
+    </div>
+
+    <script src="scripts/app.js"></script>
+</body>
+</html> 
